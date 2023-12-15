@@ -1,5 +1,5 @@
 {
   "auth": {
-    "signup": "/api/auth/signup"
+    "signUp": "/api/auth/signup"
   }
 }

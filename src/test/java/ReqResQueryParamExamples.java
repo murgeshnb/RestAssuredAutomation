@@ -2,6 +2,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utilities.PropertyUtility;
 
 import java.util.Arrays;
 import java.util.HashMap;
