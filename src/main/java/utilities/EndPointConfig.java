@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class EndPointConfig {
-    public static final String CONFIG_FILE = "endpoints.json";
+    public static final String CONFIG_FILE = "data/endpoints.json";
     public static JsonNode jsonNode;
 
     static {
