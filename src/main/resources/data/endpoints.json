@@ -8,5 +8,8 @@
   "cart": {
     "createCart": "/api/cart",
     "addCartItem": "/api/cart/{CART_ID}/items"
+  },
+  "payment": {
+    "makePayment": "/api/payment"
   }
 }
