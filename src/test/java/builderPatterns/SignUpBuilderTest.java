@@ -3,13 +3,13 @@ package builderPatterns;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import models.auth.SignUpRequestModel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utilities.EndPointConfig;
 import utilities.PropertyUtility;
 import utilities.RandomGenerator;
-import requestModels.SignupRequestModel;
 
 public class SignUpBuilderTest {
     private String propertyValue;
@@ -23,12 +23,12 @@ public class SignUpBuilderTest {
     public void dataDrivenUpdateProfileTest() {
         String randomEmail = RandomGenerator.generateRandomEmail();
 
-        SignupRequestModel signupRequestBody = SignupRequestModel.builder()
+        SignUpRequestModel.SignupRequestModel signupRequestBody = SignUpRequestModel.SignupRequestModel.builder()
                 .email(randomEmail)
                 .password("123456")
                 .build();
 
-        String signUpEndPoint = EndPointConfig.getEndPoint("auth", "signUp");
+        String signUpEndPoint = EndPointConfig.getEndPoint("models/auth", "signUp");
 
         Response signupResponse = RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -40,5 +40,4 @@ public class SignUpBuilderTest {
         Assert.assertEquals(signupResponse.statusCode(), 201, "status code not expected");
 
     }
-
 }

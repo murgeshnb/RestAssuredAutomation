@@ -7,8 +7,6 @@ import utilities.EndPointConfig;
 import utilities.PropertyUtility;
 import utilities.RandomGenerator;
 
-import java.util.Arrays;
-
 public class ExternalizeEndpointsTest {
 
     private String propertyValue;
@@ -23,7 +21,7 @@ public class ExternalizeEndpointsTest {
         String randomEmail = RandomGenerator.generateRandomEmail();
         String jsonBody = String.format("{\"email\":\"%s\", \"password\":\"123456\"}", randomEmail);
 
-        String endPoint = EndPointConfig.getEndPoint("auth", "signUp");
+        String endPoint = EndPointConfig.getEndPoint("models/auth", "signUp");
 
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
