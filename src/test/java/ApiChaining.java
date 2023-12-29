@@ -2,12 +2,12 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.apache.http.Header;
-import org.apache.http.auth.AUTH;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utilities.PropertyUtility;
+import utilities.RandomGenerator;
 
 public class ApiChaining {
     private String propertyValue;

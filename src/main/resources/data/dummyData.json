@@ -1,0 +1,11 @@
+{
+  "user": {
+    "name": "John",
+    "age": 25,
+    "emails": ["john@example.com", "john@gmail.com"],
+    "admin": {
+      "firstName": "Jofy",
+      "numbers": [1, 2]
+    }
+  }
+}

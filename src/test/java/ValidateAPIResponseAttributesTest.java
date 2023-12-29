@@ -4,9 +4,10 @@ import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utilities.PropertyUtility;
+import utilities.RandomGenerator;
 
 public class ValidateAPIResponseAttributesTest {
     private String propertyValue;
