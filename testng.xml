@@ -1,10 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestNG suite">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"></listener>
+    </listeners>
     <test name="Sample tests">
         <parameter name="username" value="userManju">
             <parameter name="password" value="BoysAdda">
                 <classes>
-                    <class name="builderPatterns.ResponseDeserializationTest"></class>
+                    <class name="e2e.PlaceSuccessfulOrderTest"></class>
                 </classes>
             </parameter>
         </parameter>

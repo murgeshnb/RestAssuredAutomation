@@ -4,6 +4,9 @@ import clients.CartClient;
 import clients.PaymentClient;
 import clients.ProductClient;
 import clients.UserClient;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.specification.ResponseSpecification;
 import models.auth.SignUpResponseModel;
 import models.auth.cart.AddItemToCartResponseModel;
 import models.auth.cart.CreateCartResponseModel;
@@ -36,14 +39,11 @@ public class PlaceSuccessfulOrderTest extends BaseTest {
         ProductListResponseModel.Product product = productListResponseModel.getProducts().get(0);
         String productId = product.getId();
         int productPrice = product.getPrice();
-        System.out.println(productPrice);
-        System.out.println(product.getName());
 
         // create cart
         CreateCartResponseModel cartResponseModel = CartClient.createCart(accessToken);
         assertEquals(cartResponseModel.getStatusCode(), 201, "crate cart failed");
         String cartId = cartResponseModel.getCartId();
-        System.out.println(cartId);
 
         // add item to cart
         int quantity = 4;
@@ -52,7 +52,6 @@ public class PlaceSuccessfulOrderTest extends BaseTest {
 
         // make payment
         MakePaymentResponseModel makePaymentResponseModel = PaymentClient.completePayment(accessToken);
-        System.out.println(makePaymentResponseModel.getMessage());
         assertEquals(makePaymentResponseModel.getStatusCode(), 200, "payment failed");
         assertEquals(makePaymentResponseModel.getMessage(), "payment success", "payment failure");
         System.out.println("total paid "+ makePaymentResponseModel.getAmountPaid());

@@ -6,18 +6,24 @@ import io.restassured.response.Response;
 import models.auth.cart.AddItemToCartRequestModel;
 import models.auth.cart.AddItemToCartResponseModel;
 import models.auth.cart.CreateCartResponseModel;
+import utilities.CommonRequestSpec;
 import utilities.EndPointConfig;
 import utilities.ResponseUtils;
+
+import static io.restassured.RestAssured.given;
 
 public class CartClient {
     public static CreateCartResponseModel createCart(String accessToken){
         String endPoint = EndPointConfig.getEndPoint("cart", "createCart");
-        System.out.println(endPoint);
 
-        Response crateCartResponse = RestAssured.given()
-                .contentType(ContentType.JSON)
-                .headers("authorization", "Bearer " + accessToken)
+        Response crateCartResponse = given()
+                .spec(CommonRequestSpec.authRequestSpecBuilder(accessToken))
                 .post(endPoint);
+
+//        Response crateCartResponse = given()
+//                .contentType(ContentType.JSON)
+//                .headers("authorization", "Bearer " + accessToken)
+//                .post(endPoint);
 
         return ResponseUtils.deserializeResponse(crateCartResponse, CreateCartResponseModel.class);
     }
@@ -28,9 +34,8 @@ public class CartClient {
 
         AddItemToCartRequestModel addItemToCartRequestBody = AddItemToCartRequestModel.builder().productId(productId).quantity(quantity).build();
 
-        Response addItemToCartResponse = RestAssured.given()
-                .headers("authorization", "Bearer " + accessToken)
-                .contentType(ContentType.JSON)
+        Response addItemToCartResponse = given()
+                .spec(CommonRequestSpec.authRequestSpecBuilder(accessToken))
                 .body(addItemToCartRequestBody)
                 .post(replacedEndPoint);
 

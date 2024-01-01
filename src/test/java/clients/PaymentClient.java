@@ -4,19 +4,20 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import models.auth.payment.MakePaymentResponseModel;
+import utilities.CommonRequestSpec;
 import utilities.EndPointConfig;
 import utilities.ResponseUtils;
+
+import static io.restassured.RestAssured.given;
 
 public class PaymentClient {
 
     public static MakePaymentResponseModel completePayment(String accessToken) {
         String paymentEndPoint = EndPointConfig.getEndPoint("payment", "makePayment");
 
-        Response paymentResponse = RestAssured.given()
-                .contentType(ContentType.JSON)
-                .headers("authorization", "Bearer " + accessToken)
+        Response paymentResponse = given()
+                .spec(CommonRequestSpec.authRequestSpecBuilder(accessToken))
                 .post(paymentEndPoint);
-        System.out.println(paymentResponse.statusCode());
 
         return ResponseUtils.deserializeResponse(paymentResponse, MakePaymentResponseModel.class);
     }
