@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 import utilities.PropertyUtility;
 import utilities.RandomGenerator;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ValidateAPIResponseAttributesTest {
     private String propertyValue;
     @BeforeMethod
@@ -38,12 +40,12 @@ public class ValidateAPIResponseAttributesTest {
         Headers responseHeaders = productResponse.getHeaders();
         long time = productResponse.getTime();
 
-        MatcherAssert.assertThat(time, Matchers.lessThan(3000L));
-        MatcherAssert.assertThat(responseHeaders.getValue("Content-Type"), Matchers.equalTo("application/json; charset=utf-8"));
+        assertThat(time, Matchers.lessThan(3000L));
+        assertThat(responseHeaders.getValue("Content-Type"), Matchers.equalTo("application/json; charset=utf-8"));
 
         //validate status and status text
-        MatcherAssert.assertThat(productResponse.getStatusCode(), Matchers.is(200));
-        MatcherAssert.assertThat(productResponse.getStatusLine(), Matchers.containsString("OK"));
+        assertThat(productResponse.getStatusCode(), Matchers.is(200));
+        assertThat(productResponse.getStatusLine(), Matchers.containsString("OK"));
 
         //get cookie
 //        String cookieValue = productResponse.getCookie("cookieName");

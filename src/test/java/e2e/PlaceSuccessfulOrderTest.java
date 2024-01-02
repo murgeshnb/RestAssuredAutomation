@@ -4,9 +4,7 @@ import clients.CartClient;
 import clients.PaymentClient;
 import clients.ProductClient;
 import clients.UserClient;
-import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.http.ContentType;
-import io.restassured.specification.ResponseSpecification;
+import io.qameta.allure.Feature;
 import models.auth.SignUpResponseModel;
 import models.auth.cart.AddItemToCartResponseModel;
 import models.auth.cart.CreateCartResponseModel;
@@ -19,7 +17,8 @@ import static org.testng.Assert.assertEquals;
 
 public class PlaceSuccessfulOrderTest extends BaseTest {
 
-    @Test
+    @Feature("Place Order")
+    @Test(groups = {"e2e", "parallel"})
     public void shouldPlaceOrderSuccessfully() {
         // Arrange
         String email = RandomGenerator.generateRandomEmail();

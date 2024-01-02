@@ -8,15 +8,17 @@ import org.testng.annotations.Test;
 import utilities.PropertyUtility;
 import utilities.RandomGenerator;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class GetProductDetails {
     private String propertyValue;
-    @BeforeMethod
+    @BeforeMethod(groups = {"parallel"})
     public void bm(){
         propertyValue = PropertyUtility.getPropertyValue("base.url");
         RestAssured.baseURI=propertyValue;
     }
 
-    @Test
+    @Test(groups = {"parallel"})
     public void getProductDetails(){
         String randomEmail = RandomGenerator.generateRandomEmail();
         String jsonBody = String.format("{\"email\":\"%s\", \"password\":\"123456\"}", randomEmail);
@@ -42,7 +44,7 @@ public class GetProductDetails {
                 .get("api/products/" + productId);
 
         System.out.println(productDetailsResponse.jsonPath().getString("id"));
-        MatcherAssert.assertThat(productId, Matchers.equalTo(productDetailsResponse.jsonPath().getString("id")));
+        assertThat(productId, Matchers.equalTo(productDetailsResponse.jsonPath().getString("id")));
 
     }
 
@@ -78,7 +80,7 @@ public class GetProductDetails {
         }
 
         System.out.println(cartDeletedResponse.statusCode());
-        MatcherAssert.assertThat(cartDeletedResponse.statusCode(), Matchers.is(204));
+        assertThat(cartDeletedResponse.statusCode(), Matchers.is(204));
 
         // Attempt to retrieve the deleted cart
         Response cartRetrievalResponse = RestAssured.given()
@@ -86,8 +88,8 @@ public class GetProductDetails {
                 .get("api/cart");
 
         // validate cart retrieval response
-        MatcherAssert.assertThat(cartRetrievalResponse.statusCode(), Matchers.is(200));
-        MatcherAssert.assertThat(cartRetrievalResponse.jsonPath().getString("message"), Matchers.equalTo("No cart found"));
+        assertThat(cartRetrievalResponse.statusCode(), Matchers.is(200));
+        assertThat(cartRetrievalResponse.jsonPath().getString("message"), Matchers.equalTo("No cart found"));
 
 
     }

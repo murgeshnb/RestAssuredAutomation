@@ -9,15 +9,17 @@ import org.testng.annotations.Test;
 import utilities.PropertyUtility;
 import utilities.RandomGenerator;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ApiChaining {
     private String propertyValue;
-    @BeforeMethod
+    @BeforeMethod(groups = {"parallel"})
     public void bm(){
         propertyValue = PropertyUtility.getPropertyValue("base.url");
         RestAssured.baseURI=propertyValue;
     }
 
-    @Test
+    @Test(groups = {"parallel"})
     public void getAccessToken(){
         String randomEmail = RandomGenerator.generateRandomEmail();
         String jsonBody = String.format("{\"email\":\"%s\", \"password\":\"123456\"}", randomEmail);
@@ -42,8 +44,8 @@ public class ApiChaining {
         System.out.println("response: "+response.jsonPath().getString("."));
 
 
-        MatcherAssert.assertThat(productsResponse.getStatusCode(), Matchers.is(200));
-        MatcherAssert.assertThat(productCount, Matchers.equalTo(2));
+        assertThat(productsResponse.getStatusCode(), Matchers.is(200));
+        assertThat(productCount, Matchers.equalTo(2));
     }
 
     @Test

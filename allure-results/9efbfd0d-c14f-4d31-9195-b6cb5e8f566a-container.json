@@ -1,0 +1,1 @@
+{"uuid":"9efbfd0d-c14f-4d31-9195-b6cb5e8f566a","name":"ExampleOnPartialUpdate.bm","children":["b3e3ac56-879d-4d2d-9076-906be27c7f94"],"description":"","befores":[{"name":"bm","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1704173764868,"stop":1704173764869}],"afters":[],"start":1704173764868,"stop":1704173764869}
