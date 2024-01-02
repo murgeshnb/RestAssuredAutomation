@@ -1,1 +1,0 @@
-{"uuid":"e2cd395f-a250-4597-a78a-5ef184d9519c","name":"e2e.PlaceSuccessfulOrderTest","children":["97753fda-eda5-42a6-b5cf-2537a127b53c"],"befores":[{"name":"setBaseURI","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1704172443804,"stop":1704172444180}],"afters":[],"start":1704172443778,"stop":1704172456002}
