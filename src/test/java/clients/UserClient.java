@@ -12,7 +12,7 @@ public class UserClient {
 
     public static SignUpResponseModel signUp(String email, String password) {
         String signUpEndPoint = EndPointConfig.getEndPoint("auth", "signUp");
-        SignUpRequestModel.SignupRequestModel requestModel = SignUpRequestModel.SignupRequestModel.builder()
+        SignUpRequestModel requestModel = SignUpRequestModel.builder()
                 .email(email)
                 .password(password)
                 .build();

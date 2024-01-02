@@ -6,7 +6,7 @@ import utilities.PropertyUtility;
 
 public class BaseTest {
 
-    @BeforeClass
+    @BeforeClass(groups = {"e2e", "parallel"})
     public void setBaseURI() {
         String propertyValue = PropertyUtility.getPropertyValue("base.url");
         RestAssured.baseURI = propertyValue;

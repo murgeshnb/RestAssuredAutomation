@@ -11,14 +11,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ExampleOnPartialUpdate {
     private String propertyValue;
-    @BeforeMethod
-    public void bm(){
+
+    @BeforeMethod(groups = {"parallel"})
+    public void bm() {
         propertyValue = PropertyUtility.getPropertyValue("base.url");
-        RestAssured.baseURI=propertyValue;
+        RestAssured.baseURI = propertyValue;
     }
 
-    @Test
-    public void updateCartItems(){
+    @Test(groups = {"parallel"})
+    public void updateCartItems() {
         String randomEmail = RandomGenerator.generateRandomEmail();
         String jsonBody = String.format("{\"email\":\"%s\", \"password\":\"123456\"}", randomEmail);
 
@@ -64,7 +65,6 @@ public class ExampleOnPartialUpdate {
         assertThat(profileUpdateResponse.jsonPath().getString("address"), Matchers.equalTo(address));
         assertThat(profileUpdateResponse.jsonPath().getString("mobile_number"), Matchers.equalTo(phoneNumber));
         assertThat(profileUpdateResponse.jsonPath().getString("user_id"), Matchers.notNullValue());
-
 
 
     }

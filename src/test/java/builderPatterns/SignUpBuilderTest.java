@@ -23,7 +23,7 @@ public class SignUpBuilderTest {
     public void dataDrivenUpdateProfileTest() {
         String randomEmail = RandomGenerator.generateRandomEmail();
 
-        SignUpRequestModel.SignupRequestModel signupRequestBody = SignUpRequestModel.SignupRequestModel.builder()
+        SignUpRequestModel signupRequestBody = SignUpRequestModel.builder()
                 .email(randomEmail)
                 .password("123456")
                 .build();

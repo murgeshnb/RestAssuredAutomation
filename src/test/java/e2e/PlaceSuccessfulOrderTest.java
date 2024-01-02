@@ -1,8 +1,14 @@
 package e2e;
 
+import clients.CartClient;
+import clients.PaymentClient;
 import clients.ProductClient;
 import clients.UserClient;
+import io.qameta.allure.Feature;
 import models.auth.SignUpResponseModel;
+import models.auth.cart.AddItemToCartResponseModel;
+import models.auth.cart.CreateCartResponseModel;
+import models.auth.payment.MakePaymentResponseModel;
 import models.auth.product.ProductListResponseModel;
 import org.testng.annotations.Test;
 import utilities.RandomGenerator;
@@ -11,7 +17,8 @@ import static org.testng.Assert.assertEquals;
 
 public class PlaceSuccessfulOrderTest extends BaseTest {
 
-    @Test
+    @Feature("Place Order")
+    @Test(groups = {"e2e", "parallel"})
     public void shouldPlaceOrderSuccessfully() {
         // Arrange
         String email = RandomGenerator.generateRandomEmail();
@@ -28,14 +35,27 @@ public class PlaceSuccessfulOrderTest extends BaseTest {
         ProductListResponseModel productListResponseModel = ProductClient.getProductsList(accessToken);
         assertEquals(productListResponseModel.getStatusCode(), 200);
 
-        ProductListResponseModel.ProductModel productModel = productListResponseModel.getProducts().get(0);
-        System.out.println(productModel.getName());
+        ProductListResponseModel.Product product = productListResponseModel.getProducts().get(0);
+        String productId = product.getId();
+        int productPrice = product.getPrice();
 
         // create cart
+        CreateCartResponseModel cartResponseModel = CartClient.createCart(accessToken);
+        assertEquals(cartResponseModel.getStatusCode(), 201, "crate cart failed");
+        String cartId = cartResponseModel.getCartId();
 
         // add item to cart
+        int quantity = 4;
+        AddItemToCartResponseModel addItemToCartResponseModel = CartClient.addItemToCart(accessToken, cartId, productId, quantity);
+        assertEquals(addItemToCartResponseModel.getStatusCode(), 201, "add item to cart failed");
 
         // make payment
+        MakePaymentResponseModel makePaymentResponseModel = PaymentClient.completePayment(accessToken);
+        assertEquals(makePaymentResponseModel.getStatusCode(), 200, "payment failed");
+        assertEquals(makePaymentResponseModel.getMessage(), "payment success", "payment failure");
+        System.out.println("total paid "+ makePaymentResponseModel.getAmountPaid());
+        int x = quantity * productPrice;
+        System.out.println("actual "+x);
 
     }
 

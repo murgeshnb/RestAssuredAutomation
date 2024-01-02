@@ -3,11 +3,11 @@ package models.auth;
 import lombok.Builder;
 import lombok.Data;
 
+@Builder
+@Data
 public class SignUpRequestModel {
-    @Builder
-    @Data
-    public static class SignupRequestModel {
+//    public static class SignupRequestModel {
         private String email;
         private String password;
-    }
+//    }
 }

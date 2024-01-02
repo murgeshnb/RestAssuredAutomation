@@ -11,6 +11,11 @@ target/
 *.iws
 *.iml
 *.ipr
+.idea/.allure
+.idea/allure-results
+.allure
+allure-results
+logs
 
 ### Eclipse ###
 .apt_generated

@@ -1,12 +1,30 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestNG suite">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"></listener>
+    </listeners>
     <test name="Sample tests">
-        <parameter name="username" value="userManju">
-            <parameter name="password" value="BoysAdda">
-                <classes>
-                    <class name="builderPatterns.ResponseDeserializationTest"></class>
-                </classes>
-            </parameter>
-        </parameter>
+        <groups>
+            <run>
+                <include name="e2e"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="e2e.PlaceSuccessfulOrderTest"></class>
+        </classes>
+    </test>
+
+    <test name="parallel tests" parallel="classes" thread-count="4">
+        <groups>
+            <run>
+                <include name="parallelClasses"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="parallel.Sample1"></class>
+            <class name="parallel.Sample2"></class>
+            <class name="parallel.Sample3"></class>
+            <class name="parallel.Sample4"></class>
+        </classes>
     </test>
 </suite>

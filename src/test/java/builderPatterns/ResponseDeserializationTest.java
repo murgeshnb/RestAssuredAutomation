@@ -29,7 +29,7 @@ public class ResponseDeserializationTest {
         String randomEmail = RandomGenerator.generateRandomEmail();
         String endPoint = EndPointConfig.getEndPoint("models/auth", "signUp");
 
-        SignUpRequestModel.SignupRequestModel requestModel = SignUpRequestModel.SignupRequestModel.builder()
+        SignUpRequestModel requestModel = SignUpRequestModel.builder()
                 .email(randomEmail)
                 .password("123456")
                 .build();
